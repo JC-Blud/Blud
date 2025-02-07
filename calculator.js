@@ -2,6 +2,10 @@ function insert(num) {
     document.getElementById("screen").value += num;
 }
 
+function appendOperator(operator) {
+    document.getElementById("screen").value += operator;
+}
+
 function clearScreen() {
     document.getElementById("screen").value = "";
 }
@@ -49,3 +53,27 @@ function calculateScientific(operation) {
             break;
     }
 }
+document.addEventListener("keydown", function (event) {
+    let key = event.key;
+
+    // Jika tombol angka ditekan (0-9)
+    if (!isNaN(key) || key === ".") {
+        insert(key);
+    }
+    // Jika tombol operator ditekan
+    else if (["+", "-", "*", "/"].includes(key)) {
+        insert(key);
+    }
+    // Jika tombol Enter ditekan untuk menghitung
+    else if (key === "Enter") {
+        calculate();
+    }
+    // Jika tombol Backspace ditekan untuk menghapus karakter terakhir
+    else if (key === "Backspace") {
+        backspace();
+    }
+    // Jika tombol Escape ditekan untuk menghapus semuanya
+    else if (key === "Escape") {
+        clearScreen();
+    }
+});
